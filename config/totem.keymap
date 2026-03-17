@@ -124,7 +124,7 @@
             bindings = <
          &kp LG(LS(Z)) &kp LG(V)  &kp LG(C)  &kp LG(X)  &kp LG(Z)      &kp LA(N6) &kp LA(N7)   &kp LA(N8)   &kp LA(N9)  &kp LA(P)
          &kp LGUI       &kp LALT   &kp LCTRL  &kp LSHFT  &caps_word      &kp LEFT   &kp DOWN     &kp UP       &kp RIGHT   &none
-&trans   &kp LA(Q)      &kp LA(R)  &kp LA(T)  &kp LA(N)  LA(LS(N))          &kp LA(N1) &kp LA(N2)   &kp LA(N3)   &kp LA(N4)    &kp LA(N5)    &trans
+&trans   &kp LA(Q)      &kp LA(R)  &kp LA(T)  &kp LA(N)  &kp LA(LS(N))      &kp LA(N1) &kp LA(N2)   &kp LA(N3)   &kp LA(N4)    &kp LA(N5)    &trans
                                     &trans     &trans     &trans          &mo NUM    &mo SYM      &trans
             >;
         };
