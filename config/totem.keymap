@@ -130,7 +130,7 @@
 
         // -------------------------------------------------------------------------
         // NAV — Vim-style Navigation
-        // -------------------------------------------------------------------------
+        // ------------------------------------------------------------------------
         nav {
             bindings = <
          &kp LG(LS(Z)) &kp LG(V)  &kp LG(C)  &kp LG(X)  &kp LG(Z)      &kp LA(N6) &kp LA(N7)   &kp LA(N8)   &kp LA(N9)  &kp LA(P)
@@ -153,14 +153,30 @@
         };
 
         // -------------------------------------------------------------------------
-        // SYM — Programming Symbols
+        // SYM — Python-Optimized Symbols
+        //
+        // Design principles:
+        //   · `():` outward roll on right hand (J→K→L) — the Python trigram
+        //   · `{}` above `()` for visual/muscle-memory bracket alignment
+        //   · `[]` top row right, `{}` below it
+        //   · `->` outward roll right bot (M→,  i.e. index→middle)
+        //   · `!=` outward roll left hand (D→S  i.e. middle→ring)
+        //   · `_`  at left index home (F) — most common Python singleton
+        //   · `#`  at left index-inner home (G) — inline comments
+        //   · `@`  at left index top (R) — decorators
+        //   · `*`  at right index-inner top (Y) — *args / **kwargs
+        //   · `-`  duplicated: H home (arithmetic) + M bot (-> roll)
+        //
+        // ~   |   &   @   %       *   {   }   [   ]
+        // ?   =   !   _   #       -   (   )   :   ;
+        // `   \   +   ^   $       <   -   >   "   '
         // -------------------------------------------------------------------------
         sym {
             bindings = <
-         &kp GRAVE &kp LT    &kp GT     &kp SQT    &kp DQT        &kp CARET  &kp AMPS     &kp STAR     &kp TILDE   &kp BSLH
-         &kp EXCL  &kp LPAR  &kp RPAR   &kp LBRC   &kp RBRC       &kp HASH   &kp DLLR     &kp PRCNT    &kp AT      &kp PIPE
-&trans   &kp LBKT  &kp RBKT  &kp MINUS  &kp UNDER  &kp PLUS       &kp EQUAL  &none        &none        &none       &none         &trans
-                              &trans     &mo NAV    &mo FUN        &trans     &trans       &trans
+         &kp TILDE  &kp PIPE  &kp AMPS   &kp AT     &kp PRCNT      &kp STAR   &kp LBRC     &kp RBRC     &kp LBKT    &kp RBKT
+         &kp QMARK  &kp EQUAL &kp EXCL   &kp UNDER  &kp HASH       &kp MINUS  &kp LPAR     &kp RPAR     &kp COLON   &kp SEMI
+&trans   &kp GRAVE  &kp BSLH  &kp PLUS   &kp CARET  &kp DLLR       &kp LT     &kp MINUS    &kp GT       &kp DQT     &kp SQT    &trans
+                               &trans     &mo NAV    &mo FUN        &trans     &trans       &trans
             >;
         };
 
@@ -169,9 +185,9 @@
         // -------------------------------------------------------------------------
         fun {
             bindings = <
-         &kp F12   &kp F7    &kp F8     &kp F9     &kp PSCRN      &none      &none        &none        &none       &none
-         &kp F11   &kp F4    &kp F5     &kp F6     &kp F10        &kp RGUI   &kp RSHFT    &kp RCTRL    &kp RALT    &none
-&trans   &kp F1    &kp F2    &kp F3     &none      &none          &none      &none        &none        &none       &none         &trans
+         &kp F1    &kp F2    &kp F3     &kp F4     &kp F5         &kp F6     &kp F7       &kp F8       &kp F9      &kp F10
+         &kp F11   &kp F12   &none      &none      &none          &kp RGUI   &kp RSHFT    &kp RCTRL    &kp RALT    &none
+&trans   &none     &none     &none      &none      &none          &none      &none        &none        &none       &none         &trans
                               &trans     &trans     &trans          &trans     &trans       &trans
             >;
         };
