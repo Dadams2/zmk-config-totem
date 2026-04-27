@@ -169,13 +169,13 @@
         //
         // ~   |   &   @   %       *   {   }   [   ]
         // ?   =   !   _   #       -   (   )   :   ;
-        // `   \   +   ^   $       <   -   >   "   '
+        // `   \   +   ^   $       "   -   <   >   '
         // -------------------------------------------------------------------------
         sym {
             bindings = <
          &kp TILDE  &kp PIPE  &kp AMPS   &kp AT     &kp PRCNT      &kp STAR   &kp LBRC     &kp RBRC     &kp LBKT    &kp RBKT
          &kp QMARK  &kp EQUAL &kp EXCL   &kp UNDER  &kp HASH       &kp MINUS  &kp LPAR     &kp RPAR     &kp COLON   &kp SEMI
-&trans   &kp GRAVE  &kp BSLH  &kp PLUS   &kp CARET  &kp DLLR       &kp LT     &kp MINUS    &kp GT       &kp DQT     &kp SQT    &trans
+&trans   &kp GRAVE  &kp BSLH  &kp PLUS   &kp CARET  &kp DLLR       &kp DQT     &kp MINUS    &kp LT       &kp GT     &kp SQT    &trans
                                &trans     &mo NAV    &mo FUN        &trans     &trans       &trans
             >;
         };
