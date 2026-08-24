@@ -63,6 +63,18 @@
             hold-trigger-key-positions = <KEYS_L THUMBS>;
             hold-trigger-on-release;
         };
+
+        // Layer-tap tuned for SPACE: only resolves to hold after a brief
+        // typing pause, so fast space->letter rolls never fire the layer
+        lts: layer_tap_space {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <TAPPING_TERM>;
+            quick-tap-ms = <QUICK_TAP_MS>;
+            require-prior-idle-ms = <REQUIRE_IDLE_MS>;
+            bindings = <&mo>, <&kp>;
+        };
     };
 
     combos {
@@ -118,36 +130,65 @@
 
         // -------------------------------------------------------------------------
         // BASE — QWERTY + Homerow Mods
+        //
+        // Thumb cluster:
+        //   L1  ESC / NAV      L2  BSPC / NUM      L3  ENTER / LGUI
+        //   R1  SPACE / SYM    R2  TAB / FUN       R3  DEL
+        //   · Every layer is one thumb-hold from base (NUM on L2, SYM on space)
+        //   · NAV + SYM still tri-layers to DEVICE
         // -------------------------------------------------------------------------
         base {
             bindings = <
          &kp Q       &kp W       &kp E        &kp R        &kp T          &kp Y      &kp U        &kp I        &kp O       &kp P
          &hml LGUI A &hml LALT S &hml LCTRL D &hml LSHFT F &kp G          &kp H      &hmr RSHFT J &hmr RCTRL K &hmr RALT L &hmr RGUI SEMI
 &kp LCTRL  &kp Z       &kp X       &kp C        &kp V        &kp B          &kp N      &kp M        &kp COMMA    &kp DOT     &kp FSLH       &kp APOS
-                                  &lt NAV ESC  &lt NUM BSPC  &mt LGUI ENTER      &kp SPACE  &lt SYM TAB  &kp DEL
+                                  &lt NAV ESC  &lt NUM BSPC  &mt LGUI ENTER      &lts SYM SPACE  &lt NAV TAB  &lt NUM DEL
             >;
         };
 
         // -------------------------------------------------------------------------
-        // NAV — Vim-style Navigation
-        // ------------------------------------------------------------------------
+        // NAV — Window Manager (yabai/skhd) + App Tab Navigation
+        //
+        // Design principles:
+        //   · cmd+1..0 top row    — tabs/panes in apps (browser, terminal, editor)
+        //   · alt+1..5 home left  — focus spaces 1-5
+        //   · alt+6..0 bot left   — focus spaces 6-10
+        //   · Same finger = same number across all three rows
+        //   · alt+hjkl home right — focus window, alt+m — recent space
+        //   · alt+p/n bot right   — prev/next space, f fullscreen, t float, d zoom
+        //   · Bot-left-outer LSHFT is the "move window" modifier: hold it to shift
+        //     any alt binding — swap window (hjkl), send to space (1..0), send to
+        //     prev/next space (p/n), native fullscreen (f)
+        //   · Window resize (ctrl+alt+hjkl) lives on the DEVICE layer
+        // -------------------------------------------------------------------------
         nav {
             bindings = <
-         &kp LA(N1) &kp LA(N2)  &kp LA(N3)  &kp LA(N4)  &kp LA(N5)      &kp LA(N6) &kp LA(N7)   &kp LA(N8)   &kp LA(N9)  &kp LA(P)
-         &kp LGUI &kp LALT   &kp LCTRL  &kp LSHFT  &caps_word      &kp LA(H)  &kp LA(J)   &kp LA(K)   &kp LA(L)  &kp LA(LS(P))
-&trans   &kp LA(T)      &kp LA(R)  &kp LA(P)  &kp LA(N)  &kp LA(LS(N))      &kp LA(N) &kp LA(M)   &kp LA(COMMA) &kp LA(DOT) &kp LA(SLASH) &trans
-                                    &trans     &trans     &trans          &mo NUM    &mo SYM      &trans
+         &kp LG(N1) &kp LG(N2) &kp LG(N3) &kp LG(N4) &kp LG(N5)      &kp LG(N6) &kp LG(N7) &kp LG(N8) &kp LG(N9) &kp LG(N0)
+         &kp LA(N1) &kp LA(N2) &kp LA(N3) &kp LA(N4) &kp LA(N5)      &kp LA(H)  &kp LA(J)  &kp LA(K)  &kp LA(L)  &kp LA(M)
+&kp LSHFT &kp LA(N6) &kp LA(N7) &kp LA(N8) &kp LA(N9) &kp LA(N0)     &kp LA(P)  &kp LA(N)  &kp LA(F)  &kp LA(T)  &kp LA(D) &kp LA(LS(E))
+                                &trans     &trans     &trans          &mo NUM    &mo SYM    &trans
             >;
         };
 
         // -------------------------------------------------------------------------
-        // NUM — Number Row + Shifted Symbols
+        // NUM — Numbers + Shifted Symbols + Glove80-style Symbol Row
+        //
+        // Design principles:
+        //   · Digits 1-0 on top row, same column as base letters
+        //   · Shifted symbols on home row, each under its digit (! @ # $ % ^ & * ( ))
+        //   · Bottom row Glove80-style: brackets open left / close right,
+        //     ` < > complete the pairs, - _ and + = on the right outer keys
+        //   · Arrows moved to left outer/home inner so home row stays symbols
+        //
+        //  1   2   3   4   5        6   7   8   9   0
+        //  !   @   #   $   %        ^   &   *   (   )
+        // ←  HOME [   ]   →         -   +   =   PG_UP  PG_DN
         // -------------------------------------------------------------------------
         num {
             bindings = <
          &kp N1    &kp N2    &kp N3     &kp N4     &kp N5         &kp N6     &kp N7       &kp N8       &kp N9      &kp N0
-        &trans    &trans    &trans     &trans     &trans          &kp LEFT   &kp DOWN    &kp UP       &kp RIGHT   &trans
- &trans &kp EXCL  &kp AT    &kp HASH   &kp DLLR   &kp PRCNT      &kp CARET  &kp AMPS     &kp STAR     &kp LPAR    &kp RPAR  &trans
+         &kp EXCL  &kp AT    &kp HASH   &kp DLLR   &kp PRCNT      &kp CARET  &kp AMPS     &kp STAR     &kp LPAR    &kp RPAR
+&kp LEFT &kp HOME  &kp LBKT  &kp RBKT   &kp RIGHT  &trans         &kp MINUS  &kp PLUS     &kp EQUAL    &kp PG_UP   &kp PG_DN &trans
                               &trans     &trans     &trans          &trans     &trans       &trans
             >;
         };
