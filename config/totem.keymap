@@ -114,6 +114,13 @@
             bindings = <&kp LG(V)>;
             layers = <BASE>;
         };
+
+        combo_bspc {
+            timeout-ms = <50>;
+            key-positions = <8 9>;
+            bindings = <&kp BSPC>;
+            layers = <BASE>;
+        };
     };
 
     conditional_layers {
