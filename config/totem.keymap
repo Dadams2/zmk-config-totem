@@ -163,9 +163,9 @@
         // -------------------------------------------------------------------------
         nav {
             bindings = <
-         &kp LG(N1) &kp LG(N2) &kp LG(N3) &kp LG(N4) &kp LG(N5)      &kp LG(N6) &kp LG(N7) &kp LG(N8) &kp LG(N9) &kp LG(N0)
+         &kp LG(N1) &kp LG(N2) &kp LG(N3) &kp LG(N4) &kp LG(N5)      &kp LG(N6) &kp LG(N7) &kp LG(N8) &kp LG(N9) &kp LA(P)
          &kp LA(N1) &kp LA(N2) &kp LA(N3) &kp LA(N4) &kp LA(N5)      &kp LA(H)  &kp LA(J)  &kp LA(K)  &kp LA(L)  &kp LA(M)
-&kp LSHFT &kp LA(N6) &kp LA(N7) &kp LA(N8) &kp LA(N9) &kp LA(N0)     &kp LA(P)  &kp LA(N)  &kp LA(F)  &kp LA(T)  &kp LA(D) &kp LA(LS(E))
+&kp LSHFT &kp LA(N6) &kp LA(N7) &kp LA(N8) &kp LA(N9) &kp LA(N0)     &kp LA(N)  &kp LA(P)  &kp LA(F)  &kp LA(T)  &kp LA(D) &kp LA(LS(E))
                                 &trans     &trans     &trans          &mo NUM    &mo SYM    &trans
             >;
         };
